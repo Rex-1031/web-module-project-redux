@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import { deleteMovie } from '../actions/movieActions';
 
 
 const Movie = (props) => {
@@ -14,33 +15,33 @@ const Movie = (props) => {
         <div className="modal-dialog">
             <div className="modal-content">
                 <div className="modal-header">						
-                    <h4 className="modal-title">{props.movies.title} Details</h4>
+                    <h4 className="modal-title">{props.title} Details</h4>
                 </div>
                 <div className="modal-body">
                     <div className="flexContainer">
 
                         <section className="movie-details">
                             <div>
-                                <label>Title: <strong>{props.movies.title}</strong></label>
+                                <label>Title: <strong>{props.title}</strong></label>
                             </div>
                             <div>
-                                <label>Director: <strong>{props.movies.director}</strong></label>
+                                <label>Director: <strong>{props.director}</strong></label>
                             </div>
                             <div>
-                                <label>Genre: <strong>{props.movies.genre}</strong></label>
+                                <label>Genre: <strong>{props.genre}</strong></label>
                             </div>
                             <div>
-                                <label>Metascore: <strong>{props.movies.metascore}</strong></label>
+                                <label>Metascore: <strong>{props.metascore}</strong></label>
                             </div>
                             <div>
                                 <label>Description:</label>
-                                <p><strong>{props.movies.description}</strong></p>
+                                <p><strong>{props.description}</strong></p>
                             </div>
                         </section>
                         
                         <section>
                             <span className="m-2 btn btn-dark">Favorite</span>
-                            <span className="delete"><input type="button" className="m-2 btn btn-danger" value="Delete"/></span>
+                            <span onClick={()=>props.deleteMovie(movies.id)} className="delete"><input type="button" className="m-2 btn btn-danger" value="Delete"/></span>
                         </section>
                     </div>
                 </div>
@@ -51,8 +52,11 @@ const Movie = (props) => {
 
 const mapStateToProps = state =>{
     return{
-        movies: state.movies
+        movie: state.movies
     }
 }
 
-export default connect(mapStateToProps)(Movie);
+const mapDispatchToProps = dispatch =>{
+    deleteMovie: (movie)=> dispatch(deleteMovie(movie))
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Movie);

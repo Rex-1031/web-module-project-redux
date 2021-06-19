@@ -27,7 +27,7 @@ const MovieList = (props)=> {
                 </tbody>
             </table>
             
-            <MovieFooter totalMovies={props.movies.length}/>
+            <MovieFooter totalMovies={props.length}/>
         </div>
     );
 }

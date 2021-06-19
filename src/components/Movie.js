@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+
 
 const Movie = (props) => {
     const { id } = useParams();
@@ -12,27 +14,27 @@ const Movie = (props) => {
         <div className="modal-dialog">
             <div className="modal-content">
                 <div className="modal-header">						
-                    <h4 className="modal-title">{movie.title} Details</h4>
+                    <h4 className="modal-title">{props.movies.title} Details</h4>
                 </div>
                 <div className="modal-body">
                     <div className="flexContainer">
 
                         <section className="movie-details">
                             <div>
-                                <label>Title: <strong>{movie.title}</strong></label>
+                                <label>Title: <strong>{props.movies.title}</strong></label>
                             </div>
                             <div>
-                                <label>Director: <strong>{movie.director}</strong></label>
+                                <label>Director: <strong>{props.movies.director}</strong></label>
                             </div>
                             <div>
-                                <label>Genre: <strong>{movie.genre}</strong></label>
+                                <label>Genre: <strong>{props.movies.genre}</strong></label>
                             </div>
                             <div>
-                                <label>Metascore: <strong>{movie.metascore}</strong></label>
+                                <label>Metascore: <strong>{props.movies.metascore}</strong></label>
                             </div>
                             <div>
                                 <label>Description:</label>
-                                <p><strong>{movie.description}</strong></p>
+                                <p><strong>{props.movies.description}</strong></p>
                             </div>
                         </section>
                         
@@ -47,4 +49,10 @@ const Movie = (props) => {
     </div>);
 }
 
-export default Movie;
+const mapStateToProps = state =>{
+    return{
+        movies: state.movies
+    }
+}
+
+export default connect(mapStateToProps)(Movie);
